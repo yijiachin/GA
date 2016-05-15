@@ -1,0 +1,77 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+/**
+ *
+ * @author 14057061
+ */
+public class Task {
+    
+
+    double[] arr2=new double[100];
+    Random rand=new Random();
+    static double hai=1000000;
+    double random = 0;
+    double temp = 0;
+    int threadnum;
+    
+    public Task(double[][] array,int row)
+    {
+        threadnum=row;
+        arr2=array[row];
+    }
+    
+    public double[] getArray()
+    {
+    	return arr2;
+    }
+    
+    /*public void run(){
+        double total=0;
+        double minimum=1000000;
+        double[] temparr=new double[100];
+        for(int b=0;b<100;b++){
+            temparr[b]=arr2[b];
+        }
+        for(int count=0;count<1000;count++){
+        for(int x=0;x<100;x++){
+            random=ThreadLocalRandom.current().nextDouble(-0.5, 0.5);
+            temp = arr2[x];
+            arr2[x]=arr2[x]+random;
+            if(arr2[x]<-5.12 || arr2[x]>5.12){
+                arr2[x]=temp;
+                x--;
+            }
+        }
+        for(int x=0;x<100;x++){
+            total = total + (arr2[x] * arr2[x]) * (x+1);
+        }
+        if(total<minimum)
+        {
+            minimum=total;
+            if(minimum<hai){
+                hai=minimum;
+            }
+            for(int b=0;b<100;b++){
+                temparr[b]=arr2[b];
+            }       
+        }
+        else
+        {
+            for(int b=0;b<100;b++){
+                arr2[b]=temparr[b];
+            }
+        }
+        if(count%20==0)
+        {
+            System.out.printf("Thread number %d, Minimum is %f\n",threadnum,minimum);
+        }
+        total=0;
+        }
+    } */ 
+}
