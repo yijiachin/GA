@@ -1,0 +1,113 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.Arrays;
+import java.util.Random;
+import java.lang.*;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+/**
+ *
+ * @author 14057061
+ */
+public class Week5 {
+    /**
+     * @param args the command line arguments
+     */
+	static double minimum=100000;
+    public static void main(String[] args) {
+    	int tempone=-1;
+    	int temptwo=-1;
+        double random = 0;
+        double temp = 0;
+        double total=0;
+        double[] newArray=new double[100];
+        double[][] arr=new double[200][100];
+        double[] min = new double[200]; 
+        double[] copymin=new double[200];
+        int counts=0;
+        for(int c=0;c<200;c++){
+            for(int x=0;x<100;x++){
+                random = ThreadLocalRandom.current().nextDouble(-5.12, 5.12);
+                arr[c][x]=random;
+            }
+        }
+        Task[] a=new Task[200];
+        for(int b=0;b<200;b++)
+        {
+        	a[b]=new Task(arr,b);
+        }
+        
+        do{
+        	tempone=-1;
+        	temptwo=-1;
+	        for(int c=0;c<200;c++){
+	            for(int d=0;d<100;d++){
+	                random=ThreadLocalRandom.current().nextDouble(-0.5, 0.5);
+	                temp = a[c].arr2[d];
+	                a[c].arr2[d]=a[c].arr2[d]+random;
+	                if(a[c].arr2[d]<-5.12 || a[c].arr2[d]>5.12){
+	                	a[c].arr2[d]=temp;
+	                    d--;
+	                }
+	            }
+	            for(int e=0;e<100;e++){
+	                total = total + (a[c].arr2[e] * a[c].arr2[e]) * (e+1);
+	                min[c]=total;
+	            }
+	            total=0;
+	       }
+	        for(int f=0;f<200;f++)
+	        {
+	        	copymin[f]=min[f];
+	        }
+	        for(int g=0;g<200;g++)
+	        {
+	        	if(copymin[g]<minimum)
+	        	{
+	        		minimum=copymin[g];
+	        	}
+	        }
+	        Arrays.sort(min);
+	        for(int counter=0;counter<200;counter++)
+	        {
+	        	if(min[0]==copymin[counter])
+	        	{
+	        		tempone=counter;
+	        	}
+	        	if(min[1]==copymin[counter])
+	        	{
+	        		temptwo=counter;
+	        	}
+	        }
+	        
+	        Arrays.sort(a[tempone].arr2);
+	        Arrays.sort(a[temptwo].arr2);
+	        for(int counters=0;counters<50;counters++)
+	        {
+	        	newArray[counters]=a[tempone].arr2[counters];
+	        }
+	        for(int counterss=51;counterss<100;counterss++)
+	        {
+	        	newArray[counterss]=a[temptwo].arr2[counterss];
+	        }
+	        for(int h=0;h<200;h++){
+	            for(int i=0;i<100;i++){
+	            	a[h].arr2[i]=newArray[i];
+	            }
+	        }
+	        
+        }while(counts++<350);
+    
+        System.out.printf("The minimum value found is %f\n\n", minimum);
+    }
+    
+}
+
